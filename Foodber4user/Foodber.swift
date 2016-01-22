@@ -24,7 +24,13 @@ class Foodber: NSObject {
         self.longitude = json["longitude"].doubleValue
         self.latitude = json["latitude"].doubleValue
         self.imageUrl = json["picture_medium"].stringValue
-        self.food = [Food(json: json["foods"])]
+        self.food = [Food]()
+        let foodArray = json["foods"].array
+        if let foodArray = foodArray{
+            for food in foodArray{
+                self.food.append(Food(json: food))
+            }
+        }
     }
     
     

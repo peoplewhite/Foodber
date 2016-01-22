@@ -23,6 +23,7 @@ class MapViewController: UIViewController, UITextFieldDelegate{
     var isFirstGetLocation = false
     
     var foodberArray = [Foodber]()
+    var foodArray = [Food]()
     var myannotationArray = [MyAnnotation]()
 
     override func viewDidLoad() {
@@ -43,7 +44,7 @@ class MapViewController: UIViewController, UITextFieldDelegate{
         
         getDataFromServer()
         
-
+        
         
     }
 
@@ -63,14 +64,16 @@ class MapViewController: UIViewController, UITextFieldDelegate{
         let apiUrl = "https://gentle-wave-2437.herokuapp.com/api/v1/food_trucks.json"
         Alamofire.request(.GET, apiUrl ).responseJSON{ response in
             if let data = response.result.value{
+//                print(data)
             let result = JSON(data)["data"]
                 for(_, subJson):(String, JSON) in result{
                     let foodber = Foodber(json: subJson)
                     self.foodberArray.append(foodber)
-                    
                     }
                 }
             }
+        
+        
     }
     
     func makeAnnotaion(foodberArray: [Foodber]){
@@ -96,7 +99,6 @@ extension MapViewController: MKMapViewDelegate{
     }
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-
         if isFirstGetLocation {
             let centerlocation = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
             reverseGeocodeLocation(centerlocation)
@@ -148,19 +150,15 @@ extension MapViewController: MKMapViewDelegate{
     
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        print("foodber\(foodberArray.count)")
         let annotation = view.annotation
         let title = (annotation?.title)!
-
-        for var i = 0; i < foodberArray.count; i++ {
-            if foodberArray[i].name == title{
-                var foodArray = [foodberArray[i].food]
-                let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
-//                controller.menuArray = foodArray
-                self.navigationController?.pushViewController(controller,animated: true)
-            }
-        }
+        let dic = ["foodber" : foodberArray]
+        NSNotificationCenter.defaultCenter().postNotificationName("updateFoodberName", object: nil, userInfo: ["name": title!])
+        NSNotificationCenter.defaultCenter().postNotificationName("updateFoodber", object: nil, userInfo: ["foodber" : foodberArray])
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+        self.navigationController?.pushViewController(controller,animated: true)
         
-//        NSNotificationCenter.defaultCenter().postNotificationName("updateMenuNoti", object: nil, userInfo: ["foodber": foodArray])
     }
     
     

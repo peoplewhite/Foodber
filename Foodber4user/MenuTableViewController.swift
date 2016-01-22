@@ -12,24 +12,37 @@ import SwiftyJSON
 
 class MenuTableViewController: UITableViewController {
     
-    let menuArray = [Food]()
-    
+    let foodberArray = [Foodber]()
+    var menuArray = [Food]()
+    let foodberName = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMenu:", name: "updateMenuNoti", object: nil)
-        print("\(menuArray.count)")
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateName:", name: "updateFoodberName", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFoodber:", name: "updateFoodber", object: nil)
+        print("meunfoodber\(foodberArray.count)")
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    func updateMenu(noti: NSNotification){
-        let menuArray = noti.userInfo!["foodber"] as! [Food]
+    func updateName(noti: NSNotification){
+        let foodberName = noti.userInfo!["name"]
+        print("foodberName: \(foodberName)")
+    } 
+    
+    func updateFoodber(noti: NSNotification){
+        let foodberArray = noti.userInfo!["foodber"] as! [Foodber]
+        print("\(foodberArray[0])")
+        for var i = 0; i < foodberArray.count; i++ {
+            if foodberArray[i].name == foodberName{
+                menuArray = foodberArray[i].food
+                self.tableView.reloadData()
+            }
+        }
         print("\(menuArray.count)")
-        
     }
     
 
@@ -46,7 +59,6 @@ class MenuTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as! MenuCell
         let menu = self.menuArray[indexPath.row]
-        print("\(menu.name)")
         cell.foodName.text! = menu.name
         cell.foodPrice.text! = "NT\(menu.price)"
 
