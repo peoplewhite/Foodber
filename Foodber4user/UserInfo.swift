@@ -10,6 +10,7 @@ import Foundation
 
 struct UserInfo{
     var userId: String?
+    var email: String?
     var name: String?
     var image: String?
     var token: String?

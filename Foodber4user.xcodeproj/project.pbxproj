@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		553284C61C4B432A0069708A /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553284C51C4B432A0069708A /* Menu.swift */; };
 		553284C81C4B77050069708A /* FacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553284C71C4B77050069708A /* FacebookViewController.swift */; };
-		5561C2DC1C40F5B80073E193 /* ShoppingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5561C2DB1C40F5B80073E193 /* ShoppingListTableViewController.swift */; };
-		559E79751C4A0D5800085ECE /* MapViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559E79741C4A0D5800085ECE /* MapViewController1.swift */; };
+		5532E7191C4D4A4F005DF7AF /* ShoppingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5532E7181C4D4A4F005DF7AF /* ShoppingListTableViewController.swift */; };
+		5532E71C1C4D4C51005DF7AF /* ShoppingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5532E71B1C4D4C51005DF7AF /* ShoppingListCell.swift */; };
+		55653B051C4FABCC0004F4B5 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55653B041C4FABCC0004F4B5 /* Food.swift */; };
 		559E79771C4A962600085ECE /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559E79761C4A962600085ECE /* UserInfo.swift */; };
 		559E79791C4A9C5D00085ECE /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559E79781C4A9C5D00085ECE /* ShoppingList.swift */; };
 		55A98AA21C3DF497004FDE01 /* AllMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A98AA11C3DF497004FDE01 /* AllMenuViewController.swift */; };
@@ -20,11 +21,11 @@
 		55B3B1E41C3423C500C6919C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55B3B1E21C3423C500C6919C /* Main.storyboard */; };
 		55B3B1E61C3423C500C6919C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B3B1E51C3423C500C6919C /* Assets.xcassets */; };
 		55B3B1E91C3423C500C6919C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 55B3B1E71C3423C500C6919C /* LaunchScreen.storyboard */; };
-		55EB29FD1C49044C00E80037 /* Annotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB29FC1C49044C00E80037 /* Annotation.swift */; };
+		55C2A13C1C51BBA5001E79C7 /* MyAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C2A13B1C51BBA5001E79C7 /* MyAnnotation.swift */; };
 		55EB29FF1C49051000E80037 /* Foodber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB29FE1C49051000E80037 /* Foodber.swift */; };
 		55EB2A041C49385800E80037 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB2A031C49385800E80037 /* MapViewController.swift */; };
+		55ED10191C4E00620005C6C1 /* DoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ED10181C4E00620005C6C1 /* DoneViewController.swift */; };
 		55EF2E791C47FAE60017B699 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E1F5C11C37B5CB002AB3A3 /* MapKit.framework */; };
-		55F09F2B1C455571007CD1FC /* FacebookViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F09F2A1C455571007CD1FC /* FacebookViewController1.swift */; };
 		55F7B0191C3FA46500F05BB8 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7B0181C3FA46500F05BB8 /* MenuCell.swift */; };
 		55F7B01B1C3FC12C00F05BB8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7B01A1C3FC12C00F05BB8 /* MenuViewController.swift */; };
 		7113D323D58DE04F5AD3339D /* Pods_Foodber4user.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487ADAA7595AF770D6CD382A /* Pods_Foodber4user.framework */; };
@@ -34,9 +35,10 @@
 		487ADAA7595AF770D6CD382A /* Pods_Foodber4user.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Foodber4user.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		553284C51C4B432A0069708A /* Menu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
 		553284C71C4B77050069708A /* FacebookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookViewController.swift; sourceTree = "<group>"; };
-		5561C2DB1C40F5B80073E193 /* ShoppingListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewController.swift; sourceTree = "<group>"; };
+		5532E7181C4D4A4F005DF7AF /* ShoppingListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewController.swift; sourceTree = "<group>"; };
+		5532E71B1C4D4C51005DF7AF /* ShoppingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListCell.swift; sourceTree = "<group>"; };
+		55653B041C4FABCC0004F4B5 /* Food.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		5567BD591C43F028009BEFC8 /* Foodber4user-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Foodber4user-Bridging-Header.h"; sourceTree = "<group>"; };
-		559E79741C4A0D5800085ECE /* MapViewController1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController1.swift; sourceTree = "<group>"; };
 		559E79761C4A962600085ECE /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		559E79781C4A9C5D00085ECE /* ShoppingList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
 		55A98AA11C3DF497004FDE01 /* AllMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllMenuViewController.swift; sourceTree = "<group>"; };
@@ -48,11 +50,11 @@
 		55B3B1E51C3423C500C6919C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		55B3B1E81C3423C500C6919C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		55B3B1EA1C3423C500C6919C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		55C2A13B1C51BBA5001E79C7 /* MyAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAnnotation.swift; sourceTree = "<group>"; };
 		55E1F5C11C37B5CB002AB3A3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		55EB29FC1C49044C00E80037 /* Annotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Annotation.swift; sourceTree = "<group>"; };
 		55EB29FE1C49051000E80037 /* Foodber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foodber.swift; sourceTree = "<group>"; };
 		55EB2A031C49385800E80037 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		55F09F2A1C455571007CD1FC /* FacebookViewController1.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookViewController1.swift; sourceTree = "<group>"; };
+		55ED10181C4E00620005C6C1 /* DoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneViewController.swift; sourceTree = "<group>"; };
 		55F7B0181C3FA46500F05BB8 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		55F7B01A1C3FC12C00F05BB8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		8B43987F4A9EDFF8B7A86AEB /* Pods-Foodber4user.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodber4user.release.xcconfig"; path = "Pods/Target Support Files/Pods-Foodber4user/Pods-Foodber4user.release.xcconfig"; sourceTree = "<group>"; };
@@ -72,17 +74,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5532E71A1C4D4C1E005DF7AF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				55F7B0181C3FA46500F05BB8 /* MenuCell.swift */,
+				5532E71B1C4D4C51005DF7AF /* ShoppingListCell.swift */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		55A98AA31C3DF4C9004FDE01 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				55B3B1E01C3423C500C6919C /* ViewController.swift */,
-				55A98AA41C3DF510004FDE01 /* MenuTableViewController.swift */,
-				55F7B01A1C3FC12C00F05BB8 /* MenuViewController.swift */,
-				55A98AA11C3DF497004FDE01 /* AllMenuViewController.swift */,
-				55F09F2A1C455571007CD1FC /* FacebookViewController1.swift */,
 				553284C71C4B77050069708A /* FacebookViewController.swift */,
-				559E79741C4A0D5800085ECE /* MapViewController1.swift */,
 				55EB2A031C49385800E80037 /* MapViewController.swift */,
+				55A98AA11C3DF497004FDE01 /* AllMenuViewController.swift */,
+				55F7B01A1C3FC12C00F05BB8 /* MenuViewController.swift */,
+				55A98AA41C3DF510004FDE01 /* MenuTableViewController.swift */,
+				5532E7181C4D4A4F005DF7AF /* ShoppingListTableViewController.swift */,
+				55ED10181C4E00620005C6C1 /* DoneViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -111,9 +122,8 @@
 			children = (
 				55EB29F71C48FB3700E80037 /* Model */,
 				55A98AA31C3DF4C9004FDE01 /* ViewController */,
+				5532E71A1C4D4C1E005DF7AF /* Cell */,
 				55B3B1DE1C3423C500C6919C /* AppDelegate.swift */,
-				5561C2DB1C40F5B80073E193 /* ShoppingListTableViewController.swift */,
-				55F7B0181C3FA46500F05BB8 /* MenuCell.swift */,
 				55B3B1E51C3423C500C6919C /* Assets.xcassets */,
 				55B3B1E21C3423C500C6919C /* Main.storyboard */,
 				55B3B1E71C3423C500C6919C /* LaunchScreen.storyboard */,
@@ -126,11 +136,12 @@
 		55EB29F71C48FB3700E80037 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				55EB29FC1C49044C00E80037 /* Annotation.swift */,
 				55EB29FE1C49051000E80037 /* Foodber.swift */,
+				55653B041C4FABCC0004F4B5 /* Food.swift */,
 				559E79761C4A962600085ECE /* UserInfo.swift */,
 				559E79781C4A9C5D00085ECE /* ShoppingList.swift */,
 				553284C51C4B432A0069708A /* Menu.swift */,
+				55C2A13B1C51BBA5001E79C7 /* MyAnnotation.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -279,18 +290,19 @@
 				55A98AA51C3DF510004FDE01 /* MenuTableViewController.swift in Sources */,
 				55EB29FF1C49051000E80037 /* Foodber.swift in Sources */,
 				55F7B01B1C3FC12C00F05BB8 /* MenuViewController.swift in Sources */,
-				55F09F2B1C455571007CD1FC /* FacebookViewController1.swift in Sources */,
+				55653B051C4FABCC0004F4B5 /* Food.swift in Sources */,
 				55F7B0191C3FA46500F05BB8 /* MenuCell.swift in Sources */,
 				55EB2A041C49385800E80037 /* MapViewController.swift in Sources */,
+				5532E71C1C4D4C51005DF7AF /* ShoppingListCell.swift in Sources */,
 				55B3B1E11C3423C500C6919C /* ViewController.swift in Sources */,
 				559E79791C4A9C5D00085ECE /* ShoppingList.swift in Sources */,
 				55B3B1DF1C3423C500C6919C /* AppDelegate.swift in Sources */,
 				553284C61C4B432A0069708A /* Menu.swift in Sources */,
+				5532E7191C4D4A4F005DF7AF /* ShoppingListTableViewController.swift in Sources */,
 				55A98AA21C3DF497004FDE01 /* AllMenuViewController.swift in Sources */,
-				55EB29FD1C49044C00E80037 /* Annotation.swift in Sources */,
-				5561C2DC1C40F5B80073E193 /* ShoppingListTableViewController.swift in Sources */,
+				55C2A13C1C51BBA5001E79C7 /* MyAnnotation.swift in Sources */,
 				559E79771C4A962600085ECE /* UserInfo.swift in Sources */,
-				559E79751C4A0D5800085ECE /* MapViewController1.swift in Sources */,
+				55ED10191C4E00620005C6C1 /* DoneViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

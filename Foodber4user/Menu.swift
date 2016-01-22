@@ -9,8 +9,8 @@
 import Foundation
 
 struct Menu {
-    var name: String
-    var image: String
-    var price: Double
-    var count: Int?
+    var foodName: String
+    var foodImage: String
+    var foodPrice: String
+    var count: Int
 }

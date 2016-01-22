@@ -18,12 +18,7 @@ class AllMenuViewController: UIViewController, UITableViewDataSource, UITableVie
         self.contentTableView.estimatedRowHeight = 100
         
         self.title = "Foodber"
-
         self.tabBarController?.tabBar.tintColor = UIColor(red: 243/255.0, green: 168/255.0, blue: 34/255.0, alpha: 1)
- 
-        
-        
-        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {

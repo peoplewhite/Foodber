@@ -12,24 +12,23 @@ import UIKit
 class MenuViewController: UIViewController {
     
     @IBOutlet weak var shopListButton: UIButton!
-    @IBOutlet weak var shopSetButton: UIButton!
+    @IBOutlet weak var menuContainerView: UIView!
     
-    override func loadView() {
-        super.loadView()
-        self.hidesBottomBarWhenPushed = true
-    }
+    var menuArray = [Food]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Menu"
         self.navigationController?.navigationBar.tintColor = UIColor(red: 243/255.0, green: 168/255.0, blue: 34/255.0, alpha: 1)
-//        self.tabBarController?.tabBar.hidden = false
+        self.navigationController?.navigationBarHidden = false
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Menu", style: UIBarButtonItemStyle.Plain, target: nil, action: nil)
         
         self.shopListButton.layer.borderColor = UIColor.whiteColor().CGColor
         self.shopListButton.layer.borderWidth = 1
-        self.shopSetButton.layer.borderColor = UIColor.whiteColor().CGColor
-        self.shopSetButton.layer.borderWidth = 1
         
+        for var i = 0; i < menuArray.count; i++ {
+            print("\(menuArray[i].price)")
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -37,6 +36,10 @@ class MenuViewController: UIViewController {
         self.hidesBottomBarWhenPushed = true
     }
     
-
+    @IBAction func showShoppingList(sender: AnyObject) {
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("DoneViewController") as! DoneViewController
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
 
 }

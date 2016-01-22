@@ -37,7 +37,7 @@ extension FacebookViewController: FBSDKLoginButtonDelegate{
                 if error == nil{
                     print("result: \(result)")
                     let resultDictionary = result as! NSDictionary
-                    self.myInformation.token = resultDictionary["token"] as? String
+                    self.myInformation.token = result.tokenString 
                     self.myInformation.name = resultDictionary["name"] as? String
                     self.myInformation.userId = resultDictionary["userId"] as? String
                     self.myInformation.image = resultDictionary["picture"] as? String
