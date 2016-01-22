@@ -66,7 +66,8 @@ class MapViewController: UIViewController, UITextFieldDelegate{
             let result = JSON(data)["data"]
                 for(_, subJson):(String, JSON) in result{
                     let foodber = Foodber(json: subJson)
-                    self.foodberArray.append(foodber)ls
+                    self.foodberArray.append(foodber)
+                    
                     }
                 }
             }
