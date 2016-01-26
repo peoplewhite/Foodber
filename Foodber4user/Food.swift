@@ -15,6 +15,7 @@ class Food: NSObject {
     var name: String
     var price: Int
     var imageUrl: String
+    var orderCount: Int
     
     init(json: JSON){
         self.id = json["id"].intValue
@@ -22,5 +23,6 @@ class Food: NSObject {
         self.name = json["name"].stringValue
         self.price = json["price"].intValue
         self.imageUrl = json["picture_medium"].stringValue
+        self.orderCount = json["count"].intValue
     }
 }

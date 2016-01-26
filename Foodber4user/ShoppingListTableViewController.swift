@@ -10,11 +10,24 @@ import UIKit
 
 class ShoppingListTableViewController: UITableViewController {
     
-    var orderArray = [ShoppingList]()
+
+    var listArray = [Food]()
+
+    
+    override func loadView() {
+        super.loadView()
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBarHidden = false
+        self.title = "OrderList"
+        self.navigationItem.leftBarButtonItem?.title = "Menu"
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
+        
         self.tableView.rowHeight = UITableViewAutomaticDimension
-        self.tableView.estimatedRowHeight = 100
+        self.tableView.estimatedRowHeight = 60
     }
 
     override func didReceiveMemoryWarning() {
@@ -29,17 +42,26 @@ class ShoppingListTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        
+        return listArray.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ShoppingListCell", forIndexPath: indexPath) 
-
-
-
+        let cell = tableView.dequeueReusableCellWithIdentifier("ShoppingListCell", forIndexPath: indexPath) as! ShoppingListCell
+        let list = listArray[indexPath.row]
+        cell.foodName.text! = list.name
+        cell.foodPrice.text! = list.price
+        cell.foodPrice.text! = list.orderCount
         return cell
     }
-
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var total = 0
+        for var i = 0; i < listArray.count; i++ {
+            total += listArray[i].price * listArray[i].orderCount
+        }
+        return "總共\(total)元"
+    }
 
     /*
     // Override to support conditional editing of the table view.

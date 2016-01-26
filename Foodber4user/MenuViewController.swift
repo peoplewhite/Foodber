@@ -14,7 +14,14 @@ class MenuViewController: UIViewController {
     @IBOutlet weak var shopListButton: UIButton!
     @IBOutlet weak var menuContainerView: UIView!
     
-//    var menuArray = [Food]()
+    var foodberArray = [Foodber]()
+    var foodberName = ""
+    
+    override func loadView() {
+        super.loadView()
+
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +32,6 @@ class MenuViewController: UIViewController {
         
         self.shopListButton.layer.borderColor = UIColor.whiteColor().CGColor
         self.shopListButton.layer.borderWidth = 1
-//        NSNotificationCenter.defaultCenter().postNotificationName("updateMenuNoti", object: nil, userInfo: ["menu": menuArray])
     }
     
     override func viewWillAppear(animated: Bool) {

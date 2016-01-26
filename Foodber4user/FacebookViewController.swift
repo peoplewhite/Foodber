@@ -11,12 +11,17 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 
 class FacebookViewController: UIViewController{
-    var myInformation = UserInfo()
+    var userInformation = UserInfo()
 
     @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cancelButton.layer.cornerRadius = 15
+        cancelButton.layer.borderWidth = 1
+        cancelButton.layer.borderColor = UIColor(red: 243/255.0, green: 168/255.0, blue: 34/255.0, alpha: 1).CGColor
+        
         facebookLoginButton.delegate = self
         facebookLoginButton.readPermissions = ["public_profile", "email"]
     }
@@ -25,6 +30,11 @@ class FacebookViewController: UIViewController{
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func cancellButton(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 
 }
 
@@ -32,22 +42,25 @@ extension FacebookViewController: FBSDKLoginButtonDelegate{
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
             if result.token != nil{
+                self.userInformation.token = result.token.tokenString
             let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "name, id, picture, gender, birthday, email"])
-            request.startWithCompletionHandler({ (sdkGraphRequestConnection, result, error) -> Void in
-                if error == nil{
-                    print("result: \(result)")
+                request.startWithCompletionHandler({ (sdkGraphRequestConnection, result, error) -> Void in
+                    
                     let resultDictionary = result as! NSDictionary
-                    self.myInformation.token = result.tokenString 
-                    self.myInformation.name = resultDictionary["name"] as? String
-                    self.myInformation.userId = resultDictionary["userId"] as? String
-                    self.myInformation.image = resultDictionary["picture"] as? String
-                    print("pic \(self.myInformation.image)")
-                    print("name \(self.myInformation.name)")
-                    print("token \(self.myInformation.token)")
+                    
+                    print("resultDictionary: \(resultDictionary)")
+
+                    self.userInformation.name = resultDictionary["name"] as? String
+                    self.userInformation.image = (resultDictionary["picture"]?["data"])?["url"] as? String
+                    print("\(self.userInformation.name)\n\( self.userInformation.image)\n\(self.userInformation.token)")
+                    
+                    
+                    let dictionary = ["userInfo": self.userInformation]
+                    NSNotificationCenter.defaultCenter().postNotificationName("updateFBInfoNoti", object: nil, userInfo: dictionary)
                     self.dismissViewControllerAnimated(true, completion: nil)
                     
-                }
             })
+                
             }
     }
     

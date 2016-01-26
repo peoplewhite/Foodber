@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKCoreKit
+import Parse
 
 
 @UIApplicationMain
@@ -19,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         FBSDKProfile.enableUpdatesOnAccessTokenChange(true)
+        Parse.setApplicationId("NmyK2lMI5lZPghyQZtnW92xWACcxUnoE9P0GVBjh", clientKey: "mGriogZTX1pfNzRZNEcS4SpvxIIrpIjVnCmO8n4j")
         return  FBSDKApplicationDelegate.sharedInstance().application(application , didFinishLaunchingWithOptions: launchOptions)
 
     }

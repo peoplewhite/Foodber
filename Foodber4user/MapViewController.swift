@@ -21,32 +21,34 @@ class MapViewController: UIViewController, UITextFieldDelegate{
 
     let locationManager = CLLocationManager()
     var isFirstGetLocation = false
+    var isAddAnnotations = false
+    var regionCanChange = true
     
     var foodberArray = [Foodber]()
     var foodArray = [Food]()
     var myannotationArray = [MyAnnotation]()
-
+    var userLocation = Location()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        getDataFromServer()
         
         print("FBSDKAccessToken.currentAccessToken() \(FBSDKAccessToken.currentAccessToken())")
-        if FBSDKAccessToken.currentAccessToken() == nil{
-            let controller = self.storyboard?.instantiateViewControllerWithIdentifier("FacebookViewController")
-            self.navigationController?.presentViewController(controller!, animated: false, completion: nil)
-        }
-        
+                
         self.tabBarController?.tabBar.tintColor = UIColor(red: 243/255.0, green: 168/255.0, blue: 34/255.0, alpha: 1)
-        self.navigationController?.navigationBarHidden = true
-        
+ 
         locationManager.requestWhenInUseAuthorization()
         mapView.delegate = self
         addressTextField.delegate = self
-        
-        getDataFromServer()
-        
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.navigationBarHidden = true
         
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -57,6 +59,10 @@ class MapViewController: UIViewController, UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         geocodeAddressString(textField.text!)
+        textField.userInteractionEnabled = false
+        iconMe.hidden = true
+        regionCanChange = false
+        
         return true
     }
     
@@ -64,16 +70,18 @@ class MapViewController: UIViewController, UITextFieldDelegate{
         let apiUrl = "https://gentle-wave-2437.herokuapp.com/api/v1/food_trucks.json"
         Alamofire.request(.GET, apiUrl ).responseJSON{ response in
             if let data = response.result.value{
-//                print(data)
             let result = JSON(data)["data"]
                 for(_, subJson):(String, JSON) in result{
                     let foodber = Foodber(json: subJson)
                     self.foodberArray.append(foodber)
                     }
                 }
+                if self.isFirstGetLocation == true && self.isAddAnnotations == false {
+                    self.makeAnnotaion(self.foodberArray)
+
+                }
+
             }
-        
-        
     }
     
     func makeAnnotaion(foodberArray: [Foodber]){
@@ -87,21 +95,32 @@ class MapViewController: UIViewController, UITextFieldDelegate{
 extension MapViewController: MKMapViewDelegate{
     
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+        print("didUpdateUserLocation1")
         if self.isFirstGetLocation == false{
+            print("didUpdateUserLocation2")
             isFirstGetLocation = true
             let region = MKCoordinateRegion(center: userLocation.location!.coordinate, span: MKCoordinateSpanMake(0.01, 0.01))
             mapView.region = region
+           
             mapView.showsUserLocation = false
             iconMe.hidden = false
-            makeAnnotaion(foodberArray)
+            
+            if self.foodberArray.isEmpty == false {
+                self.isAddAnnotations = true
+                self.makeAnnotaion(self.foodberArray)
+            }
+         
+
             
         }
     }
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
-        if isFirstGetLocation {
-            let centerlocation = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
-            reverseGeocodeLocation(centerlocation)
+        if regionCanChange {
+            if isFirstGetLocation {
+                let centerlocation = CLLocation(latitude: mapView.centerCoordinate.latitude, longitude: mapView.centerCoordinate.longitude)
+                reverseGeocodeLocation(centerlocation)
+            }
         }
     }
     
@@ -115,6 +134,7 @@ extension MapViewController: MKMapViewDelegate{
                 let addressArray = placeMark?.addressDictionary?["FormattedAddressLines"] as! [String]
                 for address in addressArray{
                     self.addressTextField.text! = address
+                    self.userLocation.address = address
                 }
             }
         })
@@ -126,6 +146,8 @@ extension MapViewController: MKMapViewDelegate{
         geoCoder.geocodeAddressString(address) { (places: [CLPlacemark]?, error: NSError?) -> Void in
             if places?.count > 0{
                 let placeMark = places?.first
+                self.userLocation.latitude = placeMark!.location?.coordinate.latitude
+                self.userLocation.longitude = placeMark!.location?.coordinate.longitude
                 let viewCenterLocation = placeMark!.location
                 self.mapView.region = MKCoordinateRegion(center: viewCenterLocation!.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
             }
@@ -150,15 +172,13 @@ extension MapViewController: MKMapViewDelegate{
     
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-        print("foodber\(foodberArray.count)")
         let annotation = view.annotation
         let title = (annotation?.title)!
-        let dic = ["foodber" : foodberArray]
-        NSNotificationCenter.defaultCenter().postNotificationName("updateFoodberName", object: nil, userInfo: ["name": title!])
-        NSNotificationCenter.defaultCenter().postNotificationName("updateFoodber", object: nil, userInfo: ["foodber" : foodberArray])
-        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MenuTableViewController") as! MenuTableViewController
+        controller.foodberArray = foodberArray
+        controller.foodberName = title!
+        controller.userLocation = userLocation
         self.navigationController?.pushViewController(controller,animated: true)
-        
     }
     
     

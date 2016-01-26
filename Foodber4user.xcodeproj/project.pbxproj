@@ -26,6 +26,7 @@
 		55EB2A041C49385800E80037 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EB2A031C49385800E80037 /* MapViewController.swift */; };
 		55ED10191C4E00620005C6C1 /* DoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55ED10181C4E00620005C6C1 /* DoneViewController.swift */; };
 		55EF2E791C47FAE60017B699 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55E1F5C11C37B5CB002AB3A3 /* MapKit.framework */; };
+		55F553FA1C566A7F00378363 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F553F91C566A7F00378363 /* Location.swift */; };
 		55F7B0191C3FA46500F05BB8 /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7B0181C3FA46500F05BB8 /* MenuCell.swift */; };
 		55F7B01B1C3FC12C00F05BB8 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F7B01A1C3FC12C00F05BB8 /* MenuViewController.swift */; };
 		7113D323D58DE04F5AD3339D /* Pods_Foodber4user.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 487ADAA7595AF770D6CD382A /* Pods_Foodber4user.framework */; };
@@ -55,6 +56,7 @@
 		55EB29FE1C49051000E80037 /* Foodber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foodber.swift; sourceTree = "<group>"; };
 		55EB2A031C49385800E80037 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		55ED10181C4E00620005C6C1 /* DoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneViewController.swift; sourceTree = "<group>"; };
+		55F553F91C566A7F00378363 /* Location.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		55F7B0181C3FA46500F05BB8 /* MenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
 		55F7B01A1C3FC12C00F05BB8 /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		8B43987F4A9EDFF8B7A86AEB /* Pods-Foodber4user.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Foodber4user.release.xcconfig"; path = "Pods/Target Support Files/Pods-Foodber4user/Pods-Foodber4user.release.xcconfig"; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				559E79781C4A9C5D00085ECE /* ShoppingList.swift */,
 				553284C51C4B432A0069708A /* Menu.swift */,
 				55C2A13B1C51BBA5001E79C7 /* MyAnnotation.swift */,
+				55F553F91C566A7F00378363 /* Location.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 				55A98AA51C3DF510004FDE01 /* MenuTableViewController.swift in Sources */,
 				55EB29FF1C49051000E80037 /* Foodber.swift in Sources */,
 				55F7B01B1C3FC12C00F05BB8 /* MenuViewController.swift in Sources */,
+				55F553FA1C566A7F00378363 /* Location.swift in Sources */,
 				55653B051C4FABCC0004F4B5 /* Food.swift in Sources */,
 				55F7B0191C3FA46500F05BB8 /* MenuCell.swift in Sources */,
 				55EB2A041C49385800E80037 /* MapViewController.swift in Sources */,

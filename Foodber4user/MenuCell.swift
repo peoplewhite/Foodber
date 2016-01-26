@@ -22,10 +22,12 @@ class MenuCell: UITableViewCell {
     var countNumber = 0
     
     override func awakeFromNib() {
-        self.priceView.layer.borderColor = UIColor.blackColor().CGColor
-        self.priceView.layer.borderWidth = 1
-        self.rectView.layer.borderColor = UIColor.blackColor().CGColor
-        self.rectView.layer.borderWidth = 1
+//        self.priceView.layer.borderColor = UIColor.blackColor().CGColor
+//        self.priceView.layer.borderWidth = 0.5
+        self.rectView.layer.borderColor = UIColor.grayColor().CGColor
+        self.rectView.layer.borderWidth = 0.5
+        self.foodView.layer.borderColor = UIColor.grayColor().CGColor
+        self.foodView.layer.borderWidth = 0.5
         
     }    
 }

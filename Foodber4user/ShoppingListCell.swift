@@ -13,9 +13,13 @@ class ShoppingListCell: UITableViewCell {
     @IBOutlet weak var foodName: UILabel!
     @IBOutlet weak var foodPrice: UILabel!
     @IBOutlet weak var orderCount: UILabel!
+    @IBOutlet weak var viewOfCell: UIView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        viewOfCell.backgroundColor = UIColor.whiteColor()
+        viewOfCell.layer.borderWidth = 0.1
+        viewOfCell.layer.borderColor = UIColor.blackColor().CGColor
 
     }
 

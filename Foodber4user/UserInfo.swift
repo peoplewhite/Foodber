@@ -8,12 +8,12 @@
 
 import Foundation
 
-struct UserInfo{
-    var userId: String?
+class UserInfo{
+    var userId: Int?
     var email: String?
     var name: String?
     var image: String?
     var token: String?
-    var longitude: Double?
-    var latitude: Double?
+    var phoneNumber: Int?
+    
 }

@@ -10,5 +10,7 @@ pod 'FBSDKShareKit'
 pod 'Alamofire'
 pod 'AlamofireImage'
 pod 'SwiftyJSON'
+pod 'Parse'
+pod 'SDWebImage'
 end
 
