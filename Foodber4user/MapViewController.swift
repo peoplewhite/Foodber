@@ -30,17 +30,17 @@ class MapViewController: UIViewController, UITextFieldDelegate{
     var userLocation = Location()
     
     
+    var foodberLoctaion = [[25.051501, 121.532838], [25.050874, 121.532838], [25.050314, 121.532838], [25.049819, 121.532838], [25.049390, 121.532838], [25.049861, 121.532838], [25.048433, 121.532838], [25.047938, 121.532838], [25.047558, 121.532838], [25.046632, 121.532838], [25.046220, 121.532838], [25.046082, 121.532838], [25.045671, 121.532838], [25.045149, 121.532838]]
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        getDataFromServer()
-        
-        print("FBSDKAccessToken.currentAccessToken() \(FBSDKAccessToken.currentAccessToken())")
-                
         self.tabBarController?.tabBar.tintColor = UIColor(red: 243/255.0, green: 168/255.0, blue: 34/255.0, alpha: 1)
  
         locationManager.requestWhenInUseAuthorization()
         mapView.delegate = self
         addressTextField.delegate = self
+//        trigger()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -59,59 +59,48 @@ class MapViewController: UIViewController, UITextFieldDelegate{
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         geocodeAddressString(textField.text!)
-        textField.userInteractionEnabled = false
-        iconMe.hidden = true
+//        textField.userInteractionEnabled = false
+//        iconMe.hidden = true
         regionCanChange = false
         
         return true
     }
-    
-    func getDataFromServer(){
-        let apiUrl = "https://gentle-wave-2437.herokuapp.com/api/v1/food_trucks.json"
-        Alamofire.request(.GET, apiUrl ).responseJSON{ response in
-            if let data = response.result.value{
-            let result = JSON(data)["data"]
-                for(_, subJson):(String, JSON) in result{
-                    let foodber = Foodber(json: subJson)
-                    self.foodberArray.append(foodber)
-                    }
-                }
-                if self.isFirstGetLocation == true && self.isAddAnnotations == false {
-                    self.makeAnnotaion(self.foodberArray)
-
-                }
-
-            }
+    func removeAnnotation(){
+        self.mapView.removeAnnotation(mapView.annotations[0])
     }
     
-    func makeAnnotaion(foodberArray: [Foodber]){
-        for var i = 0; i < foodberArray.count; i++ {
-            let foodber = foodberArray[i]
-            self.mapView.addAnnotation(MyAnnotation(coordinate: CLLocationCoordinate2D(latitude: foodber.latitude, longitude: foodber.longitude), title: foodber.name, subtitle: ""))
+    func makeAnnotation(latitude: Double, longitude: Double){
+        print(mapView.annotations)
+            self.mapView.addAnnotation(MyAnnotation(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), title: "吃義燉飯", subtitle: ""))
+    }
+    
+    func trigger(){
+        let timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "foodberRun:", userInfo: nil, repeats: true)
+    }
+    
+    func foodberRun(timer: NSTimer){
+        var i = 0
+        i++
+        if i == 14{
+            i = 0
         }
+//        removeAnnotation()
+        self.makeAnnotation(foodberLoctaion[i][0], longitude: foodberLoctaion[i][0])
     }
+    
+    
 }
 
 extension MapViewController: MKMapViewDelegate{
     
     func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
-        print("didUpdateUserLocation1")
         if self.isFirstGetLocation == false{
-            print("didUpdateUserLocation2")
             isFirstGetLocation = true
-            let region = MKCoordinateRegion(center: userLocation.location!.coordinate, span: MKCoordinateSpanMake(0.01, 0.01))
+            let region = MKCoordinateRegion(center: userLocation.location!.coordinate, span: MKCoordinateSpanMake(0.018, 0.018))
             mapView.region = region
-           
             mapView.showsUserLocation = false
             iconMe.hidden = false
-            
-            if self.foodberArray.isEmpty == false {
-                self.isAddAnnotations = true
-                self.makeAnnotaion(self.foodberArray)
-            }
-         
-
-            
+            self.makeAnnotation(foodberLoctaion[0][0], longitude: foodberLoctaion[0][1])
         }
     }
     
@@ -149,7 +138,7 @@ extension MapViewController: MKMapViewDelegate{
                 self.userLocation.latitude = placeMark!.location?.coordinate.latitude
                 self.userLocation.longitude = placeMark!.location?.coordinate.longitude
                 let viewCenterLocation = placeMark!.location
-                self.mapView.region = MKCoordinateRegion(center: viewCenterLocation!.coordinate, span: MKCoordinateSpanMake(0.005, 0.005))
+                self.mapView.region = MKCoordinateRegion(center: viewCenterLocation!.coordinate, span: MKCoordinateSpanMake(0.018, 0.018))
             }
         }
     }
@@ -173,10 +162,9 @@ extension MapViewController: MKMapViewDelegate{
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         let annotation = view.annotation
-        let title = (annotation?.title)!
         let controller = self.storyboard?.instantiateViewControllerWithIdentifier("MenuTableViewController") as! MenuTableViewController
-        controller.foodberArray = foodberArray
-        controller.foodberName = title!
+//        controller.foodberArray = foodberArray
+//        controller.foodberName = title!
         controller.userLocation = userLocation
         self.navigationController?.pushViewController(controller,animated: true)
     }

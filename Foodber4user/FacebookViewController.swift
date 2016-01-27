@@ -10,11 +10,17 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 
+protocol FacebookLoginDelegate {
+    func loginSucceed(user:UserInfo)
+}
+
 class FacebookViewController: UIViewController{
     var userInformation = UserInfo()
 
     @IBOutlet weak var facebookLoginButton: FBSDKLoginButton!
     @IBOutlet weak var cancelButton: UIButton!
+    
+    var delegate:FacebookLoginDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,10 +61,13 @@ extension FacebookViewController: FBSDKLoginButtonDelegate{
                     print("\(self.userInformation.name)\n\( self.userInformation.image)\n\(self.userInformation.token)")
                     
                     
-                    let dictionary = ["userInfo": self.userInformation]
-                    NSNotificationCenter.defaultCenter().postNotificationName("updateFBInfoNoti", object: nil, userInfo: dictionary)
-                    self.dismissViewControllerAnimated(true, completion: nil)
+//                    let dictionary = ["userInfo": self.userInformation]
+//                    NSNotificationCenter.defaultCenter().postNotificationName("updateFBInfoNoti", object: nil, userInfo: dictionary)
+                    self.dismissViewControllerAnimated(false, completion: nil)
                     
+                    if let delegate = self.delegate {
+                        delegate.loginSucceed(self.userInformation)
+                    }
             })
                 
             }

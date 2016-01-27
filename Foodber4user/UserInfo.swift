@@ -14,6 +14,6 @@ class UserInfo{
     var name: String?
     var image: String?
     var token: String?
-    var phoneNumber: Int?
+    var phoneNumber: String?
     
 }

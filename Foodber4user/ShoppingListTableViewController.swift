@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import Parse
 
 class ShoppingListTableViewController: UITableViewController {
     
 
-    var listArray = [Food]()
+    var listArray:[PFObject]!
 
     
     override func loadView() {
@@ -49,16 +50,18 @@ class ShoppingListTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("ShoppingListCell", forIndexPath: indexPath) as! ShoppingListCell
         let list = listArray[indexPath.row]
-        cell.foodName.text! = list.name
-        cell.foodPrice.text! = list.price
-        cell.foodPrice.text! = list.orderCount
+        cell.foodName.text = list["foodName"] as? String
+        cell.foodPrice.text = "\(list["foodPrice"] as! Int)"
+        cell.orderCount.text = "\(list["orderCount"] as! Int)份"
         return cell
     }
     
     override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         var total = 0
         for var i = 0; i < listArray.count; i++ {
-            total += listArray[i].price * listArray[i].orderCount
+            let price = listArray[i]["foodPrice"] as! Int
+            let orderCount = listArray[i]["orderCount"] as! Int
+            total += price * orderCount
         }
         return "總共\(total)元"
     }

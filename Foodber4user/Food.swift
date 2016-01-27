@@ -25,4 +25,13 @@ class Food: NSObject {
         self.imageUrl = json["picture_medium"].stringValue
         self.orderCount = json["count"].intValue
     }
+    
+    func getDictionary() -> [String:String] {
+        return ["id" : "\(self.id)",
+                "food_truck_id": "\(self.foodberId)",
+                "name": "\(self.name)",
+                "price": "\(self.price)",
+                "picture_medium": "\(self.imageUrl)",
+                "count": "\(self.orderCount)"]
+    }
 }

@@ -18,6 +18,7 @@ class MenuCell: UITableViewCell {
     @IBOutlet weak var counts: UILabel!
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var minusButton: UIButton!
+    @IBOutlet weak var menuName: UILabel!
     
     var countNumber = 0
     
@@ -28,6 +29,8 @@ class MenuCell: UITableViewCell {
         self.rectView.layer.borderWidth = 0.5
         self.foodView.layer.borderColor = UIColor.grayColor().CGColor
         self.foodView.layer.borderWidth = 0.5
+        self.foodView.clipsToBounds = true
+        
         
     }    
 }

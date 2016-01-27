@@ -10,12 +10,11 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import FBSDKLoginKit
+import Parse
+import SDWebImage
 
 class MenuTableViewController: UITableViewController {
     
-    var foodberArray = [Foodber]()
-    var menuArray = [Food]()
-    var orderArray:[Food]!
     var foodberName = ""
     var didOrder = false
     var total = 0
@@ -24,34 +23,42 @@ class MenuTableViewController: UITableViewController {
     
     var userLocation = Location()
     
-    override func loadView() {
-        super.loadView()
-        for var i = 0; i < foodberArray.count; i++ {
-            if foodberArray[i].name == foodberName{
-                menuArray = foodberArray[i].food
-            }
-        }
-    }
+    var userLogin: [PFObject]!
+    
+    var menuArray: [PFObject]!
+    var orderArray = [PFObject]()
+    
     
     override func viewDidLoad() {
+        
+        let menuQuery = PFQuery(className: "Menu")
+        menuQuery.findObjectsInBackgroundWithBlock { (array: [PFObject]?, error: NSError?) -> Void in
+            if let array = array{
+                self.menuArray = array
+                self.tableView.reloadData()
+            }
+        }
         
         super.viewDidLoad()
         self.title = "Menu"
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.tintColor = UIColor(red: 243/255.0, green: 168/255.0, blue: 34/255.0, alpha: 1)
         
-//        let totalButton = UIBarButtonItem(title: "NT \(total)", style: .Plain, target: nil, action: nil)
         let cargoButton = UIBarButtonItem(image: UIImage(named: "SellStock"), style: .Plain, target: self, action: "check:")
-//        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
+
         self.navigationItem.rightBarButtonItems = [cargoButton]
         self.hidesBottomBarWhenPushed = true
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
         
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFBInfo:", name: "updateFBInfoNoti", object: nil)
-    
+        let userQuery = PFQuery(className: "Me")
+        userQuery.findObjectsInBackgroundWithBlock { (array: [PFObject]?, error: NSError?) -> Void in
+            if let array = array{
+                self.userLogin = array
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,21 +77,30 @@ class MenuTableViewController: UITableViewController {
         }else{
             if FBSDKAccessToken.currentAccessToken() == nil{
                 let controller = self.storyboard?.instantiateViewControllerWithIdentifier("FacebookViewController") as! FacebookViewController
+                controller.delegate = self
                 self.presentViewController(controller, animated: true, completion: nil)
             }else{
-                let controller = self.storyboard?.instantiateViewControllerWithIdentifier("DoneViewController") as! DoneViewController
-                controller.listArray = orderArray
-                controller.userInformation = userInformation
-                controller.userLocation = userLocation
-                self.navigationController?.pushViewController(controller, animated: true)
+                let me = userLogin[0]
+                userInformation.name = me["name"] as? String
+                userInformation.image = me["image"] as? String
+//                userInformation.phoneNumber = me["phoneNumber"] as? String
+                self.finishOrder()
             }
         }
     }
     
+    func finishOrder() {
+        let controller = self.storyboard?.instantiateViewControllerWithIdentifier("DoneViewController") as! DoneViewController
+        controller.listArray = orderArray
+        controller.userInformation = userInformation
+        controller.userLocation = userLocation
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
     func checkOrder(){
-        orderArray = [Food]()
         for var i = 0; i < menuArray.count; i++ {
-            if menuArray[i].orderCount != 0{
+            let number = menuArray[i]["orderCount"] as! Int
+            if  number > 0{
                 didOrder = true
                 orderArray.append(menuArray[i])
             }
@@ -108,40 +124,74 @@ class MenuTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return menuArray.count
+        if self.menuArray == nil{
+            return 0
+        }else{
+            return menuArray.count
+        }
+        
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MenuCell", forIndexPath: indexPath) as! MenuCell
+        cell.foodView?.image = nil
+        cell.counts.text = nil
         let menu = self.menuArray[indexPath.row]
-        cell.foodName.text! = "\(menu.name)"
-        cell.foodPrice.text! = " NT\(menu.price)"
+
+        cell.menuName.text = menu["foodName"] as? String
+        cell.foodPrice.text = (" NT\(menu["foodPrice"] as! Int)")
+        
+        if (menu["orderCount"] as! Int) != 0{
+        cell.counts.text = ("× \(menu["orderCount"] as! Int)")
+        }
+        
+        let photoFile = menu["image"] as? PFFile
+        if let urlString = photoFile?.url{
+            let url = NSURL(string: urlString)
+            cell.foodView?.sd_setImageWithURL(url, placeholderImage: UIImage(named: "mapUseOfFoodber"))
+        }
+        
         cell.plusButton.tag = indexPath.row
         cell.plusButton.addTarget(self, action: "plusCount:", forControlEvents: .TouchUpInside)
         cell.minusButton.tag = indexPath.row
         cell.minusButton.addTarget(self, action: "minusCount:", forControlEvents: .TouchUpInside)
-        
         return cell
     }
     
     func plusCount(sender: UIButton){
         let indexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! MenuCell
-        ++self.menuArray[indexPath.row].orderCount
-        cell.counts.text = "× \(self.menuArray[indexPath.row].orderCount)"
+        let count = self.menuArray[indexPath.row]["orderCount"]
+        var number = count as! Int
+        number++
+        
+        cell.counts.text = "× \(number)"
+        self.menuArray[indexPath.row]["orderCount"] = number
     }
     
     func minusCount(sender: UIButton){
         let indexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! MenuCell
-        if self.menuArray[indexPath.row].orderCount > 0 {
-            --self.menuArray[indexPath.row].orderCount
-            if self.menuArray[indexPath.row].orderCount > 0{
-            cell.counts.text = "× \(self.menuArray[indexPath.row].orderCount)"
+        let count = self.menuArray[indexPath.row]["orderCount"]
+        var number = count as! Int
+        
+        if number > 0 {
+            number--
+            if number > 0{
+            cell.counts.text = "× \(number)"
             }else {
-            self.menuArray[indexPath.row].orderCount = 0
+            number = 0
             cell.counts.text = ""
             }
         }
+        self.menuArray[indexPath.row]["orderCount"] = number
+    }
+}
+
+extension MenuTableViewController : FacebookLoginDelegate {
+    
+    func loginSucceed(user: UserInfo) {
+        self.userInformation = user
+        self.finishOrder()
     }
 }
