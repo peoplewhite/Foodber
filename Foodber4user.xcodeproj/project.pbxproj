@@ -12,6 +12,10 @@
 		5532E7191C4D4A4F005DF7AF /* ShoppingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5532E7181C4D4A4F005DF7AF /* ShoppingListTableViewController.swift */; };
 		5532E71C1C4D4C51005DF7AF /* ShoppingListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5532E71B1C4D4C51005DF7AF /* ShoppingListCell.swift */; };
 		55653B051C4FABCC0004F4B5 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55653B041C4FABCC0004F4B5 /* Food.swift */; };
+		556AA7291C58E609007E26FE /* UserInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AA7281C58E609007E26FE /* UserInformationViewController.swift */; };
+		556AA72B1C58EB53007E26FE /* UserInformationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AA72A1C58EB53007E26FE /* UserInformationTableViewController.swift */; };
+		556AA72F1C58EF36007E26FE /* UserInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AA72E1C58EF36007E26FE /* UserInformationCell.swift */; };
+		556AA7311C590056007E26FE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AA7301C590056007E26FE /* WebViewController.swift */; };
 		559E79771C4A962600085ECE /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559E79761C4A962600085ECE /* UserInfo.swift */; };
 		559E79791C4A9C5D00085ECE /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559E79781C4A9C5D00085ECE /* ShoppingList.swift */; };
 		55A98AA21C3DF497004FDE01 /* AllMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A98AA11C3DF497004FDE01 /* AllMenuViewController.swift */; };
@@ -40,6 +44,10 @@
 		5532E71B1C4D4C51005DF7AF /* ShoppingListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingListCell.swift; sourceTree = "<group>"; };
 		55653B041C4FABCC0004F4B5 /* Food.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
 		5567BD591C43F028009BEFC8 /* Foodber4user-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Foodber4user-Bridging-Header.h"; sourceTree = "<group>"; };
+		556AA7281C58E609007E26FE /* UserInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInformationViewController.swift; sourceTree = "<group>"; };
+		556AA72A1C58EB53007E26FE /* UserInformationTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInformationTableViewController.swift; sourceTree = "<group>"; };
+		556AA72E1C58EF36007E26FE /* UserInformationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInformationCell.swift; sourceTree = "<group>"; };
+		556AA7301C590056007E26FE /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 		559E79761C4A962600085ECE /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		559E79781C4A9C5D00085ECE /* ShoppingList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
 		55A98AA11C3DF497004FDE01 /* AllMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllMenuViewController.swift; sourceTree = "<group>"; };
@@ -81,6 +89,7 @@
 			children = (
 				55F7B0181C3FA46500F05BB8 /* MenuCell.swift */,
 				5532E71B1C4D4C51005DF7AF /* ShoppingListCell.swift */,
+				556AA72E1C58EF36007E26FE /* UserInformationCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -96,6 +105,9 @@
 				55A98AA41C3DF510004FDE01 /* MenuTableViewController.swift */,
 				5532E7181C4D4A4F005DF7AF /* ShoppingListTableViewController.swift */,
 				55ED10181C4E00620005C6C1 /* DoneViewController.swift */,
+				556AA7281C58E609007E26FE /* UserInformationViewController.swift */,
+				556AA72A1C58EB53007E26FE /* UserInformationTableViewController.swift */,
+				556AA7301C590056007E26FE /* WebViewController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -290,7 +302,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				553284C81C4B77050069708A /* FacebookViewController.swift in Sources */,
+				556AA7311C590056007E26FE /* WebViewController.swift in Sources */,
 				55A98AA51C3DF510004FDE01 /* MenuTableViewController.swift in Sources */,
+				556AA7291C58E609007E26FE /* UserInformationViewController.swift in Sources */,
 				55EB29FF1C49051000E80037 /* Foodber.swift in Sources */,
 				55F7B01B1C3FC12C00F05BB8 /* MenuViewController.swift in Sources */,
 				55F553FA1C566A7F00378363 /* Location.swift in Sources */,
@@ -307,6 +321,8 @@
 				55C2A13C1C51BBA5001E79C7 /* MyAnnotation.swift in Sources */,
 				559E79771C4A962600085ECE /* UserInfo.swift in Sources */,
 				55ED10191C4E00620005C6C1 /* DoneViewController.swift in Sources */,
+				556AA72B1C58EB53007E26FE /* UserInformationTableViewController.swift in Sources */,
+				556AA72F1C58EF36007E26FE /* UserInformationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

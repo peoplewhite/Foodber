@@ -26,18 +26,35 @@ class MenuTableViewController: UITableViewController {
     var userLogin: [PFObject]!
     
     var menuArray: [PFObject]!
+    
     var orderArray = [PFObject]()
     
     
+    
     override func viewDidLoad() {
+        
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        self.view.addSubview(activityIndicatorView)
+        activityIndicatorView.center = self.view.center
+        activityIndicatorView.startAnimating()
+        
         
         let menuQuery = PFQuery(className: "Menu")
         menuQuery.findObjectsInBackgroundWithBlock { (array: [PFObject]?, error: NSError?) -> Void in
             if let array = array{
                 self.menuArray = array
                 self.tableView.reloadData()
+                activityIndicatorView.removeFromSuperview()
             }
         }
+        
+        let userQuery = PFQuery(className: "Me")
+        userQuery.findObjectsInBackgroundWithBlock { (array: [PFObject]?, error: NSError?) -> Void in
+            if let array = array{
+                self.userLogin = array
+            }
+        }
+        
         
         super.viewDidLoad()
         self.title = "Menu"
@@ -53,12 +70,15 @@ class MenuTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 100
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFBInfo:", name: "updateFBInfoNoti", object: nil)
-        let userQuery = PFQuery(className: "Me")
-        userQuery.findObjectsInBackgroundWithBlock { (array: [PFObject]?, error: NSError?) -> Void in
-            if let array = array{
-                self.userLogin = array
-            }
-        }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true)
+        
+        orderArray = [PFObject]()
+
+
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -142,7 +162,7 @@ class MenuTableViewController: UITableViewController {
         cell.foodPrice.text = (" NT\(menu["foodPrice"] as! Int)")
         
         if (menu["orderCount"] as! Int) != 0{
-        cell.counts.text = ("× \(menu["orderCount"] as! Int)")
+            cell.counts.text = (" ×\(menu["orderCount"] as! Int)")
         }
         
         let photoFile = menu["image"] as? PFFile
@@ -165,7 +185,7 @@ class MenuTableViewController: UITableViewController {
         var number = count as! Int
         number++
         
-        cell.counts.text = "× \(number)"
+        cell.counts.text = " ×\(number)"
         self.menuArray[indexPath.row]["orderCount"] = number
     }
     
@@ -178,7 +198,7 @@ class MenuTableViewController: UITableViewController {
         if number > 0 {
             number--
             if number > 0{
-            cell.counts.text = "× \(number)"
+            cell.counts.text = " ×\(number)"
             }else {
             number = 0
             cell.counts.text = ""

@@ -29,8 +29,25 @@ class MapViewController: UIViewController, UITextFieldDelegate{
     var myannotationArray = [MyAnnotation]()
     var userLocation = Location()
     
-    
-    var foodberLoctaion = [[25.051501, 121.532838], [25.050874, 121.532838], [25.050314, 121.532838], [25.049819, 121.532838], [25.049390, 121.532838], [25.049861, 121.532838], [25.048433, 121.532838], [25.047938, 121.532838], [25.047558, 121.532838], [25.046632, 121.532838], [25.046220, 121.532838], [25.046082, 121.532838], [25.045671, 121.532838], [25.045149, 121.532838]]
+    var i = 0
+    var foodberLoctaion = [
+        [25.051501, 121.532838],
+        [25.051201, 121.532838],
+        [25.050874, 121.532838],
+        [25.050314, 121.532838],
+        [25.049861, 121.532838],
+        [25.049519, 121.532838],
+        [25.049390, 121.532838],
+        [25.048433, 121.532838],
+        [25.047938, 121.532838],
+        [25.047558, 121.532838],
+        [25.047158, 121.532838],
+        [25.046632, 121.532838],
+        [25.046220, 121.532838],
+        [25.046982, 121.532838],
+        [25.045671, 121.532838],
+        [25.045149, 121.532838]
+    ]
     
     
     override func viewDidLoad() {
@@ -40,7 +57,9 @@ class MapViewController: UIViewController, UITextFieldDelegate{
         locationManager.requestWhenInUseAuthorization()
         mapView.delegate = self
         addressTextField.delegate = self
-//        trigger()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "trigger", name: "letFoodberGo", object: nil)
+       
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -70,22 +89,23 @@ class MapViewController: UIViewController, UITextFieldDelegate{
     }
     
     func makeAnnotation(latitude: Double, longitude: Double){
-        print(mapView.annotations)
+        print("(lat \(latitude) \(longitude) )")
             self.mapView.addAnnotation(MyAnnotation(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), title: "吃義燉飯", subtitle: ""))
     }
     
+    
+    
     func trigger(){
-        let timer = NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "foodberRun:", userInfo: nil, repeats: true)
+        let timer = NSTimer.scheduledTimerWithTimeInterval(8, target: self, selector: "foodberRun:", userInfo: nil, repeats: true)
     }
     
     func foodberRun(timer: NSTimer){
-        var i = 0
         i++
-        if i == 14{
-            i = 0
+        if i == 15{
+            timer.invalidate()
         }
-//        removeAnnotation()
-        self.makeAnnotation(foodberLoctaion[i][0], longitude: foodberLoctaion[i][0])
+        self.mapView.removeAnnotation(self.mapView.annotations.last!)
+        self.makeAnnotation(foodberLoctaion[i][0], longitude: foodberLoctaion[i][1])
     }
     
     

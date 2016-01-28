@@ -36,7 +36,7 @@ class DoneViewController: UIViewController {
             imageView.sd_setImageWithURL(url, placeholderImage:UIImage(named: "mapUseOfFoodber"))
         }
         
-        nameLabel.text! = userInformation.name!
+        nameLabel.text! = " " + userInformation.name!
         addressTextField.text! = userLocation.address!
         if userInformation.phoneNumber != nil{
             phoneNumber.text! = userInformation.phoneNumber!
@@ -83,7 +83,6 @@ class DoneViewController: UIViewController {
         orderList["userNumber"] = phoneNumber.text!
         orderList["orderFood"] = listArray
         orderList["userAddress"] = userLocation.address
-        //        orderList["token"] = userInformation.token
         orderList.saveInBackgroundWithBlock { (result: Bool, err: NSError?) -> Void in
             if result{
                 let alertController = UIAlertController(title: "訂餐成功", message: nil, preferredStyle: .Alert)
@@ -92,6 +91,7 @@ class DoneViewController: UIViewController {
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 })
                 alertController.addAction(cancelButton)
+                NSNotificationCenter.defaultCenter().postNotificationName("letFoodberGo", object: nil)
                 self.presentViewController(alertController, animated: true, completion: nil)
                 
             }else{
@@ -100,18 +100,6 @@ class DoneViewController: UIViewController {
 
         }
     }
-    
-//    func getListArray()->[[String:String]] {
-//    
-//        var array = [[String:String]]()
-//        
-//        for food in listArray {
-//            let dict = food.getDictionary()
-//            array.append(dict)
-//        }
-//        
-//        return array
-//    }
     
     func alert(title: String){
         let alertController = UIAlertController(title: title, message: nil, preferredStyle: .Alert)
