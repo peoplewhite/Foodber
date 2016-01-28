@@ -34,19 +34,20 @@ class MapViewController: UIViewController, UITextFieldDelegate{
         [25.051501, 121.532838],
         [25.051201, 121.532838],
         [25.050874, 121.532838],
-        [25.050314, 121.532838],
-        [25.049861, 121.532838],
-        [25.049519, 121.532838],
-        [25.049390, 121.532838],
+        [25.050484, 121.532838],
+        [25.050061, 121.532838],
+        [25.049619, 121.532838],
+        [25.049290, 121.532838],
+        [25.048888, 121.532838],
         [25.048433, 121.532838],
-        [25.047938, 121.532838],
-        [25.047558, 121.532838],
-        [25.047158, 121.532838],
-        [25.046632, 121.532838],
-        [25.046220, 121.532838],
+        [25.048038, 121.532838],
+        [25.047658, 121.532838],
+        [25.047258, 121.532838],
         [25.046982, 121.532838],
+        [25.046532, 121.532838],
+        [25.046120, 121.532838],
         [25.045671, 121.532838],
-        [25.045149, 121.532838]
+        [25.045249, 121.532838]
     ]
     
     
@@ -89,25 +90,25 @@ class MapViewController: UIViewController, UITextFieldDelegate{
     }
     
     func makeAnnotation(latitude: Double, longitude: Double){
-        print("(lat \(latitude) \(longitude) )")
             self.mapView.addAnnotation(MyAnnotation(coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude), title: "吃義燉飯", subtitle: ""))
     }
     
     
     
     func trigger(){
-        let timer = NSTimer.scheduledTimerWithTimeInterval(8, target: self, selector: "foodberRun:", userInfo: nil, repeats: true)
+        let timer = NSTimer.scheduledTimerWithTimeInterval(6, target: self, selector: "foodberRun:", userInfo: nil, repeats: true)
+        
     }
-    
     func foodberRun(timer: NSTimer){
         i++
-        if i == 15{
+        if i == 16{
             timer.invalidate()
         }
         self.mapView.removeAnnotation(self.mapView.annotations.last!)
         self.makeAnnotation(foodberLoctaion[i][0], longitude: foodberLoctaion[i][1])
     }
     
+
     
 }
 
@@ -186,6 +187,7 @@ extension MapViewController: MKMapViewDelegate{
 //        controller.foodberArray = foodberArray
 //        controller.foodberName = title!
         controller.userLocation = userLocation
+        mapView.deselectAnnotation(annotation, animated: false)
         self.navigationController?.pushViewController(controller,animated: true)
     }
     

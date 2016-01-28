@@ -722,6 +722,35 @@
             </objects>
             <point key="canvasLocation" x="3376" y="-76"/>
         </scene>
+        <!--Title-->
+        <scene sceneID="3gf-gO-XsJ">
+            <objects>
+                <viewController id="ng2-1L-mt5" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fxq-L8-fvS"/>
+                        <viewControllerLayoutGuide type="bottom" id="dBE-1f-BY4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9e5-fh-V1S">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7pe-fA-E3B">
+                                <rect key="frame" x="44" y="105" width="60" height="30"/>
+                                <inset key="titleEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <state key="normal" title="2" image="SellStock">
+                                    <color key="titleColor" red="0.93333333330000001" green="0.59607843140000005" blue="0.10980392160000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="5oR-Oc-o1f"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tcS-yc-iyS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5135" y="-635"/>
+        </scene>
         <!--Table View Controller-->
         <scene sceneID="Ljp-ZB-O2q">
             <objects>
@@ -735,7 +764,7 @@
                                 <rect key="frame" x="0.0" y="28" width="600" height="123"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h7m-m0-d0c" id="7V9-kj-PC3">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="123"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="122.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -1215,6 +1244,7 @@
         <image name="FoodTruck" width="1800" height="1200"/>
         <image name="FoodberIcon" width="32" height="32"/>
         <image name="Logo" width="1111" height="663"/>
+        <image name="SellStock" width="25" height="25"/>
         <image name="UserIcon" width="32" height="32"/>
         <image name="mapUseOfMe" width="30" height="55"/>
         <image name="minus" width="88" height="88"/>
