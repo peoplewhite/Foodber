@@ -48,17 +48,18 @@ extension FacebookViewController: FBSDKLoginButtonDelegate{
     
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
             if result.token != nil{
+                print(result.token.tokenString)
                 self.userInformation.token = result.token.tokenString
             let request = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "name, id, picture, gender, birthday, email"])
                 request.startWithCompletionHandler({ (sdkGraphRequestConnection, result, error) -> Void in
                     
                     let resultDictionary = result as! NSDictionary
                     
-                    print("resultDictionary: \(resultDictionary)")
+//                    print("resultDictionary: \(resultDictionary)")
 
                     self.userInformation.name = resultDictionary["name"] as? String
                     self.userInformation.image = (resultDictionary["picture"]?["data"])?["url"] as? String
-                    print("\(self.userInformation.name)\n\( self.userInformation.image)\n\(self.userInformation.token)")
+//                    print("\(self.userInformation.name)\n\( self.userInformation.image)\n\(self.userInformation.token)")
                     
                     
 //                    let dictionary = ["userInfo": self.userInformation]

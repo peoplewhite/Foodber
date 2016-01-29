@@ -28,8 +28,9 @@ class DoneViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        imageView.layer.cornerRadius = 35
+        imageView.layer.cornerRadius = 40
         imageView.clipsToBounds = true
+        
         
         if let imageUrl = userInformation.image{
             let url = NSURL(string: imageUrl)
@@ -46,9 +47,9 @@ class DoneViewController: UIViewController {
         shoppinglistTableView.listArray = listArray
         
         self.navigationController?.navigationBarHidden = false
-        self.title = "List"
+        self.title = "清單"
         
-        self.navigationItem.leftBarButtonItem?.title = "Menu"
+        self.navigationItem.leftBarButtonItem?.title = "菜單"
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: "done:")
         
         phoneNumber.placeholder = "電話號碼:"
@@ -68,6 +69,7 @@ class DoneViewController: UIViewController {
     
     func done(sender: AnyObject){
         
+        
         guard phoneNumber.text! != "" else {
             alert("請輸入電話！")
             return
@@ -78,6 +80,11 @@ class DoneViewController: UIViewController {
             return
         }
         
+        let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+        self.view.window?.addSubview(activityIndicatorView)
+        activityIndicatorView.center = self.view.window!.center
+        activityIndicatorView.startAnimating()
+        
         let orderList = PFObject(className: "OrderHistory")
         orderList["userName"] = userInformation.name!
         orderList["userNumber"] = phoneNumber.text!
@@ -86,14 +93,14 @@ class DoneViewController: UIViewController {
         orderList.saveInBackgroundWithBlock { (result: Bool, err: NSError?) -> Void in
             if result{
                 let alertController = UIAlertController(title: "訂餐成功", message: nil, preferredStyle: .Alert)
-                let cancelButton = UIAlertAction(title: "等待大餐", style: .Cancel , handler: { (action: UIAlertAction) -> Void in
+                let cancelButton = UIAlertAction(title: "確認", style: .Cancel , handler: { (action: UIAlertAction) -> Void in
                     self.dismissViewControllerAnimated(true, completion: nil)
                     self.navigationController?.popToRootViewControllerAnimated(true)
                 })
                 alertController.addAction(cancelButton)
                 NSNotificationCenter.defaultCenter().postNotificationName("letFoodberGo", object: nil)
                 self.presentViewController(alertController, animated: true, completion: nil)
-                
+                activityIndicatorView.removeFromSuperview()
             }else{
                 print("ohno")
             }

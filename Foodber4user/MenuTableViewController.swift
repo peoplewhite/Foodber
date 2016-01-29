@@ -30,28 +30,44 @@ class MenuTableViewController: UITableViewController {
     var orderArray = [PFObject]()
     
     
+    
     var numberBut:UIButton!
     
     let customColor = UIColor(red: 243/255.0, green: 168/255.0, blue: 34/255.0, alpha: 1)
     
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        print("address: \(userLocation.address)")
         
         let activityIndicatorView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
         self.view.addSubview(activityIndicatorView)
         activityIndicatorView.center = self.view.center
         activityIndicatorView.startAnimating()
         
-        
-        let menuQuery = PFQuery(className: "Menu")
-        menuQuery.findObjectsInBackgroundWithBlock { (array: [PFObject]?, error: NSError?) -> Void in
-            if let array = array{
-                self.menuArray = array
-                for var i = 0; i < self.menuArray.count; i++ {
-                    self.menuArray[i]["orderCount"] = 0
+        if foodberName == "吃義燉飯"{
+            let menuQuery = PFQuery(className: "Menu")
+            menuQuery.findObjectsInBackgroundWithBlock { (array: [PFObject]?, error: NSError?) -> Void in
+                if let array = array{
+                    self.menuArray = array
+                    for var i = 0; i < self.menuArray.count; i++ {
+                        self.menuArray[i]["orderCount"] = 0
+                    }
+                    self.tableView.reloadData()
+                    activityIndicatorView.removeFromSuperview()
                 }
-                self.tableView.reloadData()
-                activityIndicatorView.removeFromSuperview()
+            }
+        }else if foodberName == "打尼尼號"{
+            let menuQuery = PFQuery(className: "Panini")
+            menuQuery.findObjectsInBackgroundWithBlock { (array: [PFObject]?, error: NSError?) -> Void in
+                if let array = array{
+                    self.menuArray = array
+                    for var i = 0; i < self.menuArray.count; i++ {
+                        self.menuArray[i]["orderCount"] = 0
+                    }
+                    self.tableView.reloadData()
+                    activityIndicatorView.removeFromSuperview()
+                }
             }
         }
         
@@ -63,8 +79,8 @@ class MenuTableViewController: UITableViewController {
         }
         
         
-        super.viewDidLoad()
-        self.title = "Menu"
+        
+        self.title = "菜單"
         self.navigationController?.navigationBarHidden = false
         self.navigationController?.navigationBar.tintColor = customColor
         
@@ -77,20 +93,24 @@ class MenuTableViewController: UITableViewController {
         self.numberBut.setImage(image, forState: .Normal)
         self.numberBut.setTitleColor(customColor, forState: .Normal)
         self.numberBut.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-        numberBut.titleLabel!.font = UIFont(name: "HelveticaNeue-Thin", size: 14.0)
+        numberBut.titleLabel!.font = UIFont(name: "HelveticaNeue-Regular", size: 16.0)
         numberBut.addTarget(self, action: "check:", forControlEvents: .TouchUpInside)
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.numberBut)
         
-        self.hidesBottomBarWhenPushed = true
+        //self.hidesBottomBarWhenPushed = true
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 100
+        
+        self.numberBut.setTitle("\(0)", forState: .Normal)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFBInfo:", name: "updateFBInfoNoti", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
+        self.navigationController?.navigationBarHidden = false
+        self.tabBarController?.hidesBottomBarWhenPushed = false
         orderArray = [PFObject]()
     }
 
@@ -171,9 +191,9 @@ class MenuTableViewController: UITableViewController {
         cell.counts.text = nil
         let menu = self.menuArray[indexPath.row]
 
-        cell.menuName.text = menu["foodName"] as? String
+        cell.menuName.text = ("     \(menu["foodName"] as! String)")
         cell.foodPrice.text = (" NT\(menu["foodPrice"] as! Int)")
-        
+        cell.foodIntroduce.text = ("      \(menu["introduce"] as! String)")
         if (menu["orderCount"] as! Int) != 0{
             cell.counts.text = (" ×\(menu["orderCount"] as! Int)")
         }
@@ -181,7 +201,7 @@ class MenuTableViewController: UITableViewController {
         let photoFile = menu["image"] as? PFFile
         if let urlString = photoFile?.url{
             let url = NSURL(string: urlString)
-            cell.foodView?.sd_setImageWithURL(url, placeholderImage: UIImage(named: "mapUseOfFoodber"))
+            cell.foodView?.sd_setImageWithURL(url, placeholderImage: UIImage(named: "Logo"))
         }
         
         cell.plusButton.tag = indexPath.row
@@ -196,13 +216,10 @@ class MenuTableViewController: UITableViewController {
         let indexPath = NSIndexPath(forRow: sender.tag, inSection: 0)
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! MenuCell
         let count = self.menuArray[indexPath.row]["orderCount"]
-//        let price = self.menuArray[indexPath.row]["foodPrice"] as! Int
         var number = count as! Int
         number++
-       
         cell.counts.text = " ×\(number)"
         self.menuArray[indexPath.row]["orderCount"] = number
-        
         self.numberBut.setTitle("\(countTotal())", forState: .Normal)
 
     }
@@ -212,8 +229,6 @@ class MenuTableViewController: UITableViewController {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! MenuCell
         let count = self.menuArray[indexPath.row]["orderCount"]
         var number = count as! Int
-//        let price = self.menuArray[indexPath.row]["foodPrice"] as! Int
-        
         if number > 0 {
             number--
             if number > 0{
@@ -232,9 +247,7 @@ class MenuTableViewController: UITableViewController {
         for var i = 0; i < menuArray.count; i++ {
             let price = menuArray[i]["foodPrice"] as! Int
             let orderCount = menuArray[i]["orderCount"] as! Int
-            print(price, orderCount)
             total += price * orderCount
-            print(total)
         }
         return total
     }

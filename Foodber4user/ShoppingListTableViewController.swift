@@ -54,7 +54,7 @@ class ShoppingListTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("ShoppingListCell", forIndexPath: indexPath) as! ShoppingListCell
         let list = listArray[indexPath.row]
         cell.foodName.text = list["foodName"] as? String
-        cell.foodPrice.text = "\(list["foodPrice"] as! Int)"
+        cell.foodPrice.text = "NT\(list["foodPrice"] as! Int)"
         cell.orderCount.text = "\(list["orderCount"] as! Int)份"
         return cell
     }

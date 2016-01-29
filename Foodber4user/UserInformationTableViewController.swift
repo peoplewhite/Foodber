@@ -22,7 +22,7 @@ class UserInformationTableViewController: UITableViewController, UITextFieldDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        userImage.layer.cornerRadius = 10
+        userImage.layer.cornerRadius = 40
         userImage.clipsToBounds = true
         let userQuery = PFQuery(className: "Me")
         userQuery.findObjectsInBackgroundWithBlock { (array: [PFObject]?, error: NSError?) -> Void in
@@ -42,7 +42,7 @@ class UserInformationTableViewController: UITableViewController, UITextFieldDele
         
         let tap = UITapGestureRecognizer(target: self, action: "tap:")
         self.view.addGestureRecognizer(tap)
-        
+        self.title = "使用者"
         userPhoneNumber.keyboardType = .NumberPad
     }
     
@@ -51,7 +51,7 @@ class UserInformationTableViewController: UITableViewController, UITextFieldDele
     }
 
     @IBAction func aboutUs(sender: AnyObject) {
-        let url = NSURL(string: "https://www.facebook.com/letseat0528/?fref=ts")
+        let url = NSURL(string: "https://www.facebook.com/Foodber-193034864378316/?fref=ts")
         let controller = SFSafariViewController(URL: url!)
         self.presentViewController(controller, animated: true, completion: nil)
     }

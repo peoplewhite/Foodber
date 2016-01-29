@@ -19,6 +19,7 @@ class MenuCell: UITableViewCell {
     @IBOutlet weak var plusButton: UIButton!
     @IBOutlet weak var minusButton: UIButton!
     @IBOutlet weak var menuName: UILabel!
+    @IBOutlet weak var foodIntroduce: UILabel!
     
     var countNumber = 0
     

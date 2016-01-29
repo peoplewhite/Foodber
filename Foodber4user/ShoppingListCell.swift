@@ -20,6 +20,7 @@ class ShoppingListCell: UITableViewCell {
         viewOfCell.backgroundColor = UIColor.whiteColor()
         viewOfCell.layer.borderWidth = 0.1
         viewOfCell.layer.borderColor = UIColor.blackColor().CGColor
+        foodName.layer.cornerRadius = 5
 
     }
 
