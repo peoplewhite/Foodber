@@ -19,8 +19,6 @@ class MenuViewController: UIViewController {
     
     override func loadView() {
         super.loadView()
-
-        
     }
     
     override func viewDidLoad() {

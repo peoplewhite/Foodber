@@ -10,6 +10,7 @@ import UIKit
 import SDWebImage
 import Parse
 import SwiftyJSON
+import Alamofire
 
 class DoneViewController: UIViewController {
     
@@ -31,13 +32,13 @@ class DoneViewController: UIViewController {
         imageView.layer.cornerRadius = 40
         imageView.clipsToBounds = true
         
-        
         if let imageUrl = userInformation.image{
             let url = NSURL(string: imageUrl)
             imageView.sd_setImageWithURL(url, placeholderImage:UIImage(named: "mapUseOfFoodber"))
         }
         
         nameLabel.text! = " " + userInformation.name!
+        phoneNumber.text! = userInformation.phoneNumber!
         addressTextField.text! = userLocation.address!
         if userInformation.phoneNumber != nil{
             phoneNumber.text! = userInformation.phoneNumber!
@@ -85,6 +86,18 @@ class DoneViewController: UIViewController {
         activityIndicatorView.center = self.view.window!.center
         activityIndicatorView.startAnimating()
         
+        let apiUrl = "http://www.foodber.space/food_trucks/1/get_order"
+        let parameter = ["get_order": "1"]
+        Alamofire.request( .POST, apiUrl, parameters: parameter).responseJSON{ response in switch response.result {
+            
+        case .Success(let data):
+            print("success: \(data)")
+        case .Failure(let error):
+            print("failure: \(error)")
+            }
+        }
+        
+        
         let orderList = PFObject(className: "OrderHistory")
         orderList["userName"] = userInformation.name!
         orderList["userNumber"] = phoneNumber.text!
@@ -104,7 +117,6 @@ class DoneViewController: UIViewController {
             }else{
                 print("ohno")
             }
-
         }
     }
     

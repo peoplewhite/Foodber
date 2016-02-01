@@ -586,11 +586,11 @@
             </objects>
             <point key="canvasLocation" x="387" y="344"/>
         </scene>
-        <!--Search-->
+        <!--尋找-->
         <scene sceneID="vyv-QZ-2GY">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KcF-HJ-LUP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Search" image="FoodberIcon" id="lX7-rB-m89"/>
+                    <tabBarItem key="tabBarItem" title="尋找" image="FoodberIcon" id="lX7-rB-m89"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kuY-b7-ZXS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -770,11 +770,11 @@
             </objects>
             <point key="canvasLocation" x="3376" y="-76"/>
         </scene>
-        <!--User-->
+        <!--使用者-->
         <scene sceneID="UEc-o9-U17">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Tfc-hC-Ul6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="User" image="UserIcon" id="cif-s1-En3"/>
+                    <tabBarItem key="tabBarItem" title="使用者" image="UserIcon" id="cif-s1-En3"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="gqx-aH-MkR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -827,11 +827,20 @@
                                                         <constraint firstAttribute="height" constant="80" id="ZiE-OG-JOr"/>
                                                     </constraints>
                                                 </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Z4-Tt-FB4" customClass="FBSDKLoginButton">
+                                                    <rect key="frame" x="552" y="8" width="40" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="HWu-3l-51E"/>
+                                                        <constraint firstAttribute="height" constant="30" id="rQg-zb-0u2"/>
+                                                    </constraints>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="2BU-U5-Phb" firstAttribute="leading" secondItem="j6U-db-LJS" secondAttribute="leadingMargin" constant="30" id="5F2-W6-aE2"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="2BU-U5-Phb" secondAttribute="bottom" id="O3t-9q-YwX"/>
                                                 <constraint firstItem="bPA-AN-20J" firstAttribute="leading" secondItem="2BU-U5-Phb" secondAttribute="trailing" constant="10" id="RmJ-4k-tNF"/>
+                                                <constraint firstItem="8Z4-Tt-FB4" firstAttribute="top" secondItem="j6U-db-LJS" secondAttribute="topMargin" id="WbQ-ie-T88"/>
+                                                <constraint firstItem="8Z4-Tt-FB4" firstAttribute="trailing" secondItem="j6U-db-LJS" secondAttribute="trailingMargin" id="Xnq-bb-OB8"/>
                                                 <constraint firstItem="bPA-AN-20J" firstAttribute="centerY" secondItem="2BU-U5-Phb" secondAttribute="centerY" id="eoO-rm-MjU"/>
                                                 <constraint firstItem="2BU-U5-Phb" firstAttribute="top" secondItem="j6U-db-LJS" secondAttribute="topMargin" constant="10" id="hw1-E7-MMF"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="bPA-AN-20J" secondAttribute="trailing" id="kFi-fC-pmC"/>

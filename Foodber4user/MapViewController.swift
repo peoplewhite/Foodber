@@ -107,14 +107,13 @@ class MapViewController: UIViewController, UITextFieldDelegate{
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "trigger1", name: "letFoodberGo", object: nil)
         
-        getTransitETA()
+//        getTransitETA()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true)
         self.navigationController?.navigationBarHidden = true
-        
-        
+//        regionCanChange = true
     }
     
 
@@ -230,25 +229,25 @@ extension MapViewController: MKMapViewDelegate{
     }
     
     //MARK: -MKDirection
-    func getTransitETA(){
-        let request = MKDirectionsRequest()
-        let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 25.051501, longitude: 121.532838), addressDictionary: nil))
-        request.source = source
-        
-        let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 25.045249, longitude: 121.532838), addressDictionary: nil))
-        request.destination = destination
-        
-        request.transportType = MKDirectionsTransportType.Walking
-        
-        let directions = MKDirections(request: request)
-        directions.calculateETAWithCompletionHandler { (response, error: NSError?) -> Void in
-            if error == nil{
-                if let r = response{
-                    print(" time: \(r.expectedTravelTime)")
-                }
-            }
-        }
-    }
+//    func getTransitETA(){
+//        let request = MKDirectionsRequest()
+//        let source = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 25.051501, longitude: 121.532838), addressDictionary: nil))
+//        request.source = source
+//        
+//        let destination = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 25.045249, longitude: 121.532838), addressDictionary: nil))
+//        request.destination = destination
+//        
+//        request.transportType = MKDirectionsTransportType.Walking
+//        
+//        let directions = MKDirections(request: request)
+//        directions.calculateETAWithCompletionHandler { (response, error: NSError?) -> Void in
+//            if error == nil{
+//                if let r = response{
+//                    print(" time: \(r.expectedTravelTime)")
+//                }
+//            }
+//        }
+//    }
     
    
     //MARK: -Annotation

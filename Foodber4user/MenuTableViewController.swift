@@ -136,7 +136,7 @@ class MenuTableViewController: UITableViewController {
                 let me = userLogin[0]
                 userInformation.name = me["name"] as? String
                 userInformation.image = me["image"] as? String
-//                userInformation.phoneNumber = me["phoneNumber"] as? String
+                userInformation.phoneNumber = me["phoneNumber"] as? String
                 self.finishOrder()
             }
         }
